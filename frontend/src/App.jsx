@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Markdown from "react-markdown";
 
 function App() {
   const [data, setData] = useState({ code: "" });
@@ -11,13 +12,12 @@ function App() {
 
   let handleForm = async (e) => {
     e.preventDefault();
-    let res = await fetch("http://localhost:3000/ai/get-content", {
+    let res = await fetch(`http://localhost:3000/ai/get-content`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code: data.code }),
     });
     let resdata = await res.json();
-    console.log(resdata);
     setRecieved(resdata.data || "No response");
   };
 
@@ -42,7 +42,7 @@ function App() {
       </div>
       <div className="w-full lg:w-1/2 h-full p-8 flex items-center justify-center">
         <div className="bg-zinc-800 w-full h-64 p-6 rounded-lg shadow-lg text-white text-lg overflow-auto">
-          {recieved}
+          <Markdown>{recieved}</Markdown>
         </div>
       </div>
     </div>
