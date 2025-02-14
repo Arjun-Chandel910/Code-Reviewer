@@ -17,6 +17,7 @@ function App() {
       body: JSON.stringify({ code: data.code }),
     });
     let resdata = await res.json();
+    console.log(resdata);
     setRecieved(resdata.data || "No response");
   };
 
